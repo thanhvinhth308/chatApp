@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>vinh chat</h1>
+    <button id="btn-increment">+1</button>
+    <p>count <span id="value-count"></span></p>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        //yêu cầu sever kêt nối với client
+        var socket = io();
+        //lắng nghe sự kiên,nhân lại dữ liệu từ sever gửi về
+        socket.on("send count to client", (count) => {
+            console.log("Đã nhận được count")
+            document.getElementById('value-count').innerHTML = count;
+            console.log(count)
+        })
+        socket.on("send message to client", (message) => {
+            console.log("Đã nhận được message")
+            console.log(message)
+        })
+        document.getElementById('btn-increment').addEventListener("click", () => {
+            //gửi sự kiên từ client lên sever
+            socket.emit('send increment from client to sever')
+        })
+    </script>
+</body>
+
+</html>
