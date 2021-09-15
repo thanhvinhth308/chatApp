@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <h1>Chat app</h1>
+        <form action="" id="form-message">
+            <input type="text" id="input-messages">
+            <button type="submit">send</button>
+            <button type="button" id="btn-share-location">Send location</button>
+        </form>
+    </main>
+    <button id="btn-increment">+1</button>
+    <p>count <span id="value-count"></span></p>
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js"
+        integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./js/client-chat.js"></script>
+</body>
+
+</html>

@@ -33,3 +33,37 @@ document.getElementById("form-message").addEventListener("submit", (e) => {
     acknowledgements
   );
 });
+
+//gửi vị trí
+document.getElementById("btn-share-location").addEventListener("click", () => {
+  //navigator là phương thức có sănx của browser
+  if (!navigator.geolocation) return alert("not support");
+  navigator.geolocation.getCurrentPosition((position) => {
+    const { latitude, longitude } = position.coords;
+    socket.emit("share location from client to server", {
+      latitude,
+      longitude,
+    });
+  });
+});
+
+socket.on("share location from server to client", (linkLocation) => {
+  console.log(
+    "🚀 ~ file: client-chat.js ~ line 51 ~ socket.on ~ linkLocation",
+    linkLocation
+  );
+});
+
+// xử lý query String
+const queryString = location.search;
+const params = Qs.parse(queryString, { ignoreQueryPrefix: true });
+const { room, username } = params;
+socket.emit("join room from client to server", { room, username });
+
+//xử lý nhân user list
+socket.on("send user list from server to client", (userList) => {
+  console.log(
+    "🚀 ~ file: client-chat.js ~ line 65 ~ socket.on ~ userList",
+    userList
+  );
+});
